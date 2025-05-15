@@ -24,7 +24,10 @@ const AdminSidebar = () => {
           <MdOutlineDashboard />
           <span>Dashboard</span>
         </NavLink>
-        <NavLink to="/admin-dashboard">
+        <NavLink
+          to="/admin-dashboard/employees"
+          className={({ isActive }) => (isActive ? styles.active : "")}
+        >
           <FaUsers />
           <span>Employees</span>
         </NavLink>
