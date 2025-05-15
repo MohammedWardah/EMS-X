@@ -5,10 +5,10 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   const { user } = useAuth();
   return (
-    <div className={styles.navbar}>
+    <nav className={styles.navbar}>
       <span>Hello, {user.name}</span>
       <button>Logout</button>
-    </div>
+    </nav>
   );
 };
 

@@ -1,9 +1,4 @@
 .sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 15vw;
   color: var(--xwhite);
   border-right: 1px solid var(--input-border);
   display: flex;

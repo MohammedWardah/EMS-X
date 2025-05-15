@@ -44,29 +44,8 @@
   letter-spacing: 2px;
 }
 
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px var(--xwhite);
-  }
-  50% {
-    box-shadow: 0 0 10px var(--xwhite);
-  }
-  100% {
-    box-shadow: 0 0 3px var(--xwhite);
-  }
-}
-
 .form input {
-  border: 1px solid var(--input-border);
-  background-color: var(--input-background);
-  border-radius: 0.4rem;
-  padding: 2px 5px;
   width: 400px;
-}
-
-.form input:focus {
-  outline: none;
-  animation: glow 3s infinite;
 }
 
 .login button {
