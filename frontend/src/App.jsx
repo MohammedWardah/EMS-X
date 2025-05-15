@@ -8,6 +8,7 @@ import RoleBasedRoutes from "./utilities/RoleBasedRoutes";
 import AdminSummary from "./components/dashboard/AdminSummary";
 import DepartmentList from "./components/department/DepartmentList";
 import AddDepartment from "./components/department/AddDepartment";
+import EditDepartment from "./components/department/EditDepartment";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route index element={<AdminSummary />}></Route>
           <Route path="departments" element={<DepartmentList />}></Route>
           <Route path="add-department" element={<AddDepartment />}></Route>
+          <Route path="departments/:id" element={<EditDepartment />}></Route>
         </Route>
         <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
       </Routes>
