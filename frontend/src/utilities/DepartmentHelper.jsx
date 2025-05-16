@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const columns = [
   {
-    name: "S No",
+    name: "No",
     selector: (row) => row.sno,
   },
   {
