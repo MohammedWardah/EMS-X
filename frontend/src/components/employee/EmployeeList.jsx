@@ -7,6 +7,7 @@ import axios from "axios";
 const EmployeeList = () => {
   const [employees, setEmployees] = React.useState([]);
   const [empLoading, setEmpLoading] = React.useState(false);
+  const [filteredEmployees, setFilteredEmployees] = React.useState([]);
 
   React.useEffect(() => {
     const fetchEmployees = async () => {
@@ -29,7 +30,7 @@ const EmployeeList = () => {
               <img
                 width={45}
                 className="rounded-full"
-                src={`http://localhost:5000${emp.userId.profileImage}`}
+                src={`http://localhost:5000/${emp.userId.profileImage}`}
               />
             ),
             // bonus:
@@ -38,6 +39,7 @@ const EmployeeList = () => {
             action: <EmployeeButtons id={emp._id} />,
           }));
           setEmployees(data);
+          setFilteredEmployees(data);
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {
@@ -51,19 +53,31 @@ const EmployeeList = () => {
     fetchEmployees();
   }, []);
 
+  const handleFilter = (e) => {
+    const records = employees.filter((emp) =>
+      emp.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredEmployees(records);
+  };
+
   return (
     <div className="p-6">
       <div className="text-center">
         <h3 className="text-2xl font-bold">Manage Employees</h3>
       </div>
       <div className="flex justify-between items-center">
-        <input type="text" placeholder="Search" className="px-4 py-0.5" />
+        <input
+          type="text"
+          placeholder="Search"
+          className="px-4 py-0.5"
+          onChange={handleFilter}
+        />
         <Link to="/admin-dashboard/add-employee" className="px-4 py-1 bg-gray-600">
           Add New Employee
         </Link>
       </div>
-      <div>
-        <DataTable columns={columns} data={employees} pagination striped />
+      <div className="mt-6">
+        <DataTable columns={columns} data={filteredEmployees} pagination striped />
       </div>
     </div>
   );

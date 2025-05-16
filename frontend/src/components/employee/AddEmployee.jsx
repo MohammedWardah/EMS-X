@@ -150,12 +150,15 @@ const AddEmployee = () => {
           </div>
           {/* Marital Status */}
           <div>
-            <label htmlFor="ms" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="maritalStatus"
+              className="block text-sm font-medium text-gray-700"
+            >
               Marital Status
             </label>
             <select
-              name="ms"
-              id="ms"
+              name="maritalStatus"
+              id="maritalStatus"
               required
               onChange={handleChange}
               className="mt-1 p-2 block w-full border border-gray-300 rounded-md"

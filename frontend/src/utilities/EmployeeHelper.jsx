@@ -16,7 +16,7 @@ export const columns = [
   {
     name: "Photo",
     selector: (row) => row.profileImage,
-    width: "100px",
+    width: "120px",
   },
   {
     name: "Department",
@@ -31,7 +31,6 @@ export const columns = [
   {
     name: "Action",
     selector: (row) => row.action,
-    center: true,
   },
 ];
 
@@ -82,10 +81,24 @@ export const EmployeeButtons = ({ id }) => {
 
   return (
     <div className="flex space-x-3">
-      <button className="px-4 py-1 bg-green-600 text-white">View</button>
+      <button
+        className="px-4 py-1 bg-green-600 text-white"
+        onClick={() => {
+          navigate(`/admin-dashboard/employees/${id}`);
+        }}
+      >
+        View
+      </button>
       <button className="px-4 py-1 bg-red-600 text-white">Leave</button>
       <button className="px-4 py-1 bg-yellow-600 text-white">Salary</button>
-      <button className="px-4 py-1 bg-blue-600 text-white">Edit</button>
+      <button
+        className="px-4 py-1 bg-blue-600 text-white"
+        onClick={() => {
+          navigate(`/admin-dashboard/employees/edit/${id}`);
+        }}
+      >
+        Edit
+      </button>
     </div>
   );
 };
