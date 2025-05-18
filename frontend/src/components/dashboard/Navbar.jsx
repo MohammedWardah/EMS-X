@@ -7,7 +7,6 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <span>Hello, {user.name}</span>
-      <button>Logout</button>
     </nav>
   );
 };

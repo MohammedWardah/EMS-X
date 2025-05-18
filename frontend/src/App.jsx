@@ -13,6 +13,8 @@ import EmployeeList from "./components/employee/EmployeeList";
 import AddEmployee from "./components/employee/AddEmployee";
 import ViewEmployee from "./components/employee/ViewEmployee";
 import EditEmployee from "./components/employee/EditEmployee";
+import AddSalary from "./components/salary/AddSalary";
+import ViewSalary from "./components/salary/ViewSalary";
 
 function App() {
   return (
@@ -31,13 +33,18 @@ function App() {
           }
         >
           <Route index element={<AdminSummary />}></Route>
+
           <Route path="employees" element={<EmployeeList />}></Route>
           <Route path="add-employee" element={<AddEmployee />}></Route>
           <Route path="employees/:id" element={<ViewEmployee />}></Route>
           <Route path="employees/edit/:id" element={<EditEmployee />}></Route>
+          <Route path="employees/salary/:id" element={<ViewSalary />}></Route>
+
           <Route path="departments" element={<DepartmentList />}></Route>
           <Route path="add-department" element={<AddDepartment />}></Route>
           <Route path="departments/:id" element={<EditDepartment />}></Route>
+
+          <Route path="salary/add" element={<AddSalary />}></Route>
         </Route>
         <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
       </Routes>

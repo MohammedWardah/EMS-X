@@ -25,6 +25,13 @@ const AdminSidebar = () => {
           <span>Dashboard</span>
         </NavLink>
         <NavLink
+          to="/admin-dashboard/departments"
+          className={({ isActive }) => (isActive ? styles.active : "")}
+        >
+          <MdBusiness />
+          <span>Departments</span>
+        </NavLink>
+        <NavLink
           to="/admin-dashboard/employees"
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
@@ -32,24 +39,27 @@ const AdminSidebar = () => {
           <span>Employees</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/departments"
+          to="/admin-dashboard/leave"
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
-          <MdBusiness />
-          <span>Department</span>
-        </NavLink>
-        <NavLink to="/admin-dashboard">
           <IoMdExit />
           <span>Leave</span>
         </NavLink>
-        <NavLink to="/admin-dashboard">
+        <NavLink
+          to="/admin-dashboard/salary/add"
+          className={({ isActive }) => (isActive ? styles.active : "")}
+        >
           <LiaMoneyCheckAltSolid />
           <span>Salary</span>
         </NavLink>
-        <NavLink to="/admin-dashboard">
+        <NavLink
+          to="/admin-dashboard/settings"
+          className={({ isActive }) => (isActive ? styles.active : "")}
+        >
           <LiaCogSolid />
           <span>Settings</span>
         </NavLink>
+        <button className={styles.logout}>Logout</button>
       </div>
     </aside>
   );

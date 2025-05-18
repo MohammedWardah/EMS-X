@@ -6,6 +6,7 @@ import {
   getEmployees,
   getEmployee,
   updateEmployee,
+  fetchEmployeesByDepId,
 } from "../controllers/employeeController.js";
 import { get } from "mongoose";
 
@@ -15,6 +16,6 @@ router.post("/add", authMiddleware, upload.single("image"), addEmployee);
 router.get("/", authMiddleware, getEmployees);
 router.get("/:id", authMiddleware, getEmployee);
 router.put("/:id", authMiddleware, updateEmployee);
-// router.delete("/:id", authMiddleware, deleteDepartment);
+router.get("/department/:id", authMiddleware, fetchEmployeesByDepId);
 
 export default router;
