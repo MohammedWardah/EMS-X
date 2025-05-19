@@ -15,13 +15,16 @@ import ViewEmployee from "./components/employee/ViewEmployee";
 import EditEmployee from "./components/employee/EditEmployee";
 import AddSalary from "./components/salary/AddSalary";
 import ViewSalary from "./components/salary/ViewSalary";
+import EmpSummary from "./components/employeeDashboard/EmpSummary";
+import LeaveList from "./components/leave/LeaveList";
+import RequestLeave from "./components/leave/RequestLeave";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/" element={<Navigate to="/admin-dashboard" />}></Route>
         <Route
           path="/admin-dashboard"
           element={
@@ -46,7 +49,21 @@ function App() {
 
           <Route path="salary/add" element={<AddSalary />}></Route>
         </Route>
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
+        <Route
+          path="/employee-dashboard"
+          element={
+            <PrivateRoutes>
+              <RoleBasedRoutes requiredRole={["admin", "employee"]}>
+                <EmployeeDashboard />
+              </RoleBasedRoutes>
+            </PrivateRoutes>
+          }
+        >
+          <Route index element={<EmpSummary />}></Route>
+          <Route path={"profile/:id"} element={<ViewEmployee />}></Route>
+          <Route path={"leave"} element={<LeaveList />}></Route>
+          <Route path={"request-leave"} element={<RequestLeave />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

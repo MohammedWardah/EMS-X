@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./AdminSidebar.module.css";
-import { useAuth } from "../../context/authContext.jsx";
+import styles from "../dashboard/AdminSidebar.module.css";
+import { useAuth } from "../../context/authContext";
 // Icons
 import { FaUsers } from "react-icons/fa";
 import { MdOutlineDashboard, MdBusiness } from "react-icons/md";
@@ -9,8 +9,9 @@ import { LiaCogSolid, LiaMoneyCheckAltSolid } from "react-icons/lia";
 import { IoMdExit } from "react-icons/io";
 import logo from "../../assets/images/logo.png";
 
-const AdminSidebar = () => {
+const EmpSidebar = () => {
   const { logout } = useAuth();
+  const { user } = useAuth();
   return (
     <aside className={styles.sidebar}>
       <div className={styles.title}>
@@ -19,7 +20,7 @@ const AdminSidebar = () => {
       </div>
       <div className={styles.navLinks}>
         <NavLink
-          to="/admin-dashboard"
+          to="/employee-dashboard"
           className={({ isActive }) => (isActive ? styles.active : "")}
           end
         >
@@ -27,35 +28,28 @@ const AdminSidebar = () => {
           <span>Dashboard</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/departments"
-          className={({ isActive }) => (isActive ? styles.active : "")}
-        >
-          <MdBusiness />
-          <span>Departments</span>
-        </NavLink>
-        <NavLink
-          to="/admin-dashboard/employees"
+          to={`/employee-dashboard/profile/${user._id}`}
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <FaUsers />
-          <span>Employees</span>
+          <span>Profile</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/leave"
+          to="/employee-dashboard/leave"
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <IoMdExit />
           <span>Leave</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/salary/add"
+          to="/employee-dashboard/salary"
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <LiaMoneyCheckAltSolid />
           <span>Salary</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/settings"
+          to="/employee-dashboard/settings"
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <LiaCogSolid />
@@ -69,4 +63,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default EmpSidebar;

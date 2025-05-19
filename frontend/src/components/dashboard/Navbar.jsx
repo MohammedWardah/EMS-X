@@ -6,7 +6,7 @@ const Navbar = () => {
   const { user } = useAuth();
   return (
     <nav className={styles.navbar}>
-      <span>Hello, {user.name}</span>
+      <span>{user.name}</span>
     </nav>
   );
 };
