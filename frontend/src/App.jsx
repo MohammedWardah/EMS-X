@@ -19,6 +19,8 @@ import EmpSummary from "./components/employeeDashboard/EmpSummary";
 import LeaveList from "./components/leave/LeaveList";
 import RequestLeave from "./components/leave/RequestLeave";
 import Settings from "./components/employeeDashboard/Settings";
+import LeaveTable from "./components/leave/LeaveTable";
+import LeaveDetails from "./components/leave/LeaveDetails";
 
 function App() {
   return (
@@ -43,12 +45,17 @@ function App() {
           <Route path="employees/:id" element={<ViewEmployee />}></Route>
           <Route path="employees/edit/:id" element={<EditEmployee />}></Route>
           <Route path="employees/salary/:id" element={<ViewSalary />}></Route>
+          <Route path="employees/leave-requests/:id" element={<LeaveList />}></Route>
 
           <Route path="departments" element={<DepartmentList />}></Route>
           <Route path="add-department" element={<AddDepartment />}></Route>
           <Route path="departments/:id" element={<EditDepartment />}></Route>
 
           <Route path="salary/add" element={<AddSalary />}></Route>
+          <Route path="leave-requests" element={<LeaveTable />}></Route>
+          <Route path="leave-requests/:id" element={<LeaveDetails />}></Route>
+
+          <Route path={"settings"} element={<Settings />}></Route>
         </Route>
         <Route
           path="/employee-dashboard"
@@ -62,7 +69,7 @@ function App() {
         >
           <Route index element={<EmpSummary />}></Route>
           <Route path={"profile/:id"} element={<ViewEmployee />}></Route>
-          <Route path={"leave"} element={<LeaveList />}></Route>
+          <Route path={"leave/:id"} element={<LeaveList />}></Route>
           <Route path={"request-leave"} element={<RequestLeave />}></Route>
           <Route path={"salary/:id"} element={<ViewSalary />}></Route>
           <Route path={"settings"} element={<Settings />}></Route>

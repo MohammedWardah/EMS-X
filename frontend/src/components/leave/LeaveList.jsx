@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../context/authContext";
 
 const LeaveList = () => {
-  const { user } = useAuth();
-  const [leaves, setLeaves] = React.useState([]);
+  const [leaves, setLeaves] = React.useState(null);
   let sno = 1;
+  const { id } = useParams();
+  const { user } = useAuth();
 
   const fetchLeaves = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/leave/${user._id}`, {
+      const response = await axios.get(`http://localhost:5000/api/leave/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -29,20 +30,25 @@ const LeaveList = () => {
     fetchLeaves();
   }, []);
 
+  if (!leaves) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="p-6">
       <div className="text-center">
         <h3 className="text-2xl font-bold">Leave Requests</h3>
       </div>
       <div className="flex justify-between items-center">
-        <Link
-          to="/employee-dashboard/request-leave"
-          className="px-4 py-1 bg-teal-600 rounded text-white"
-        >
-          New Request
-        </Link>
+        {user.role === "employee" && (
+          <Link
+            to="/employee-dashboard/request-leave"
+            className="px-4 py-1 bg-teal-600 rounded text-white"
+          >
+            New Request
+          </Link>
+        )}
       </div>
-
       <table className="w-full text-sm text-left text-white-900 mt-6">
         <thead className="text-xs text-green-800 uppercase bg-gray-900 border border-gray-300">
           <tr>
@@ -71,7 +77,7 @@ const LeaveList = () => {
               </td>
               <td className="px-6 py-3">{leave.reason}</td>
               <td className="px-6 py-3">
-                {new Date(leave.appliedDate).toLocaleDateString()}
+                {new Date(leave.appliedAt).toLocaleDateString()}
               </td>
               <td className="px-6 py-3">{leave.status}</td>
             </tr>

@@ -37,8 +37,7 @@ const Settings = () => {
           }
         );
         if (response.data.success) {
-          navigate("/employee-dashboard");
-          setError("");
+          navigate("/login");
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {

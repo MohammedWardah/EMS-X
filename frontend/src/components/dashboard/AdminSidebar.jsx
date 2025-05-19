@@ -41,7 +41,7 @@ const AdminSidebar = () => {
           <span>Employees</span>
         </NavLink>
         <NavLink
-          to="/admin-dashboard/leave"
+          to="/admin-dashboard/leave-requests"
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <IoMdExit />

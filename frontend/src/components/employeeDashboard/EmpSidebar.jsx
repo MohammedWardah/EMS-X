@@ -35,7 +35,7 @@ const EmpSidebar = () => {
           <span>Profile</span>
         </NavLink>
         <NavLink
-          to="/employee-dashboard/leave"
+          to={`/employee-dashboard/leave/${user._id}`}
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <IoMdExit />
