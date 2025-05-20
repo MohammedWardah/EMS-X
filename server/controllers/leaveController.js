@@ -24,9 +24,12 @@ const addLeave = async (req, res) => {
 
 const getLeave = async (req, res) => {
   try {
-    const { id } = req.params;
-    let leaves = await Leave.find({ employeeId: id });
-    if (!leaves || leaves.length === 0) {
+    const { id, role } = req.params;
+
+    let leaves;
+    if (role === "admin") {
+      leaves = await Leave.find({ employeeId: id });
+    } else {
       const employee = await Employee.findOne({ userId: id });
       leaves = await Leave.find({ employeeId: employee._id });
     }

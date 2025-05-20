@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 export const columns = [
   {
@@ -76,6 +77,7 @@ export const getEmployees = async (id) => {
 };
 
 export const EmployeeButtons = ({ id }) => {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   // const handleDelete = async (_id) => {

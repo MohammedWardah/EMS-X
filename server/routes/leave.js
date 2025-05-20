@@ -11,9 +11,9 @@ import {
 const router = express.Router();
 
 router.post("/add", authMiddleware, addLeave);
-router.get("/:id", authMiddleware, getLeave);
+router.get("/detail/:id", authMiddleware, getLeaveDetail);
+router.get("/:id/:role", authMiddleware, getLeave);
 router.put("/:id", authMiddleware, updateLeave);
 router.get("/", authMiddleware, getLeaves);
-router.get("/detail/:id", authMiddleware, getLeaveDetail);
 
 export default router;
