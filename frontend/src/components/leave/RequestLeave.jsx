@@ -29,7 +29,7 @@ const RequestLeave = () => {
       });
 
       if (response.data.success) {
-        navigate("/employee-dashboard/leave");
+        navigate(`/employee-dashboard/leave/${user._id}`);
       }
     } catch (error) {
       if (error.response && !error.response.data.success) {

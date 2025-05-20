@@ -22,7 +22,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
 
   const handleDelete = async (_id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this department?"
+      "Are you sure you want to delete this department? *WARNING: DOING SO WILL DELETE ALL EMPLOYEES THAT BELONG TO THIS DEPARTMENT ALONG WITH THEIR RECORDS!"
     );
     if (!confirmDelete) return;
     try {
@@ -32,9 +32,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
         },
       });
       if (response.data.success) {
-        onDepartmentDelete(_id);
-        // Temp fix of (no records to display) by refreshing the page
-        window.location.reload();
+        onDepartmentDelete();
       }
     } catch (error) {
       if (error.response && !error.response.data.success) {
