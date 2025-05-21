@@ -14,6 +14,22 @@ import {
 
 const AdminSummary = () => {
   const [summary, setSummary] = useState(null);
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const currentMonth = monthNames[new Date().getMonth()];
+  const text = `${currentMonth} Payroll`;
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -56,7 +72,7 @@ const AdminSummary = () => {
         />
         <SummaryCard
           icon={<FaMoneyBill />}
-          text="Monthly Pay"
+          text={text}
           number={`$${summary.totalSalary}`}
           color="bg-gray-600"
         />

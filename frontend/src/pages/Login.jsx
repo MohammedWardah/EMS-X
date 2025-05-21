@@ -48,7 +48,7 @@ const Login = () => {
         </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Login to EMS-X</h2>
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className={styles.error}>{error}</p>}
           <div>
             <label htmlFor="email">Email</label>
             <input

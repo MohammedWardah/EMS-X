@@ -42,13 +42,13 @@ input:focus {
 
 @keyframes glow {
   0% {
-    box-shadow: 0 0 5px var(--xwhite);
+    box-shadow: 0 0 5px var(--xgreen);
   }
   50% {
-    box-shadow: 0 0 10px var(--xwhite);
+    box-shadow: 0 0 10px var(--xgreen);
   }
   100% {
-    box-shadow: 0 0 3px var(--xwhite);
+    box-shadow: 0 0 3px var(--xgreen);
   }
 }
 /* Custom Input styles end*/

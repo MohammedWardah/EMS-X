@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styles from "../dashboard/AdminSidebar.module.css";
 import { useAuth } from "../../context/authContext";
 // Icons
-import { FaUsers } from "react-icons/fa";
+import { FaNewspaper, FaUsers } from "react-icons/fa";
 import { MdOutlineDashboard, MdBusiness } from "react-icons/md";
 import { LiaCogSolid, LiaMoneyCheckAltSolid } from "react-icons/lia";
 import { IoMdExit } from "react-icons/io";
@@ -46,7 +46,7 @@ const EmpSidebar = () => {
           className={({ isActive }) => (isActive ? styles.active : "")}
         >
           <LiaMoneyCheckAltSolid />
-          <span>Salary</span>
+          <span>Payroll</span>
         </NavLink>
         <NavLink
           to="/employee-dashboard/settings"
