@@ -6,6 +6,7 @@ import styles from "./Login.module.css";
 import { useAuth } from "../context/authContext.jsx";
 
 import logo from "../assets/images/logo.png";
+import logomini from "../assets/images/logomini.png";
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
@@ -43,11 +44,11 @@ const Login = () => {
     <>
       <main className={styles.login}>
         <div className={styles.logo}>
-          <img src={logo} alt="logo" />
+          <img src={logomini} alt="logo" />
           <h1>EMS-X</h1>
         </div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>Login to EMS-X</h2>
+          <h2>EMS-X Login</h2>
           {error && <p className={styles.error}>{error}</p>}
           <div>
             <label htmlFor="email">Email</label>

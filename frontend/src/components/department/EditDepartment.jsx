@@ -66,37 +66,59 @@ const EditDepartment = () => {
   return (
     <>
       {depLoading ? (
-        <div>Loading...</div>
+        <div className="flex items-center justify-center h-80">
+          <span className="text-lg text-gray-400">Loading...</span>
+        </div>
       ) : (
-        <div>
-          <div>
-            <h3>Edit Department</h3>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="dep_name">New Name</label>
-                <input
-                  id="dep_name"
-                  name="dep_name"
-                  type="text"
-                  placeholder="Enter department name"
-                  onChange={handleChange}
-                  value={department.dep_name}
-                />
-              </div>
-              <div>
-                <label htmlFor="description">New Description</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  type="text"
-                  placeholder="Description"
-                  onChange={handleChange}
-                  value={department.description}
-                />
-              </div>
-              <button className="bg-gray-600">Apply Edit</button>
-            </form>
-          </div>
+        <div
+          className="max-h-2/3 flex mt-10 justify-center p-6 flex-col items-center
+"
+        >
+          <h3 className="text-2xl font-bold  mb-8 text-center tracking-wide drop-shadow">
+            Edit Department
+          </h3>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col justify-center w-full max-w-md bg-white/5 backdrop-blur-lg border border-gray-800 rounded-2xl shadow-2xl px-8 py-10 gap-5"
+          >
+            <div>
+              <label
+                htmlFor="dep_name"
+                className="block text-[#e5e7eb] font-semibold mb-2"
+              >
+                New Name
+              </label>
+              <input
+                id="dep_name"
+                name="dep_name"
+                type="text"
+                placeholder="Enter department name"
+                onChange={handleChange}
+                value={department.dep_name}
+                className="w-full rounded-xl px-4 py-3 bg-[#232936] text-[#e5e7eb] border border-[#232936] placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-all duration-200 shadow-sm"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="description"
+                className="block text-[#e5e7eb] font-semibold mb-2"
+              >
+                New Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                type="text"
+                placeholder="Description"
+                onChange={handleChange}
+                value={department.description}
+                className="w-full rounded-xl px-4 py-3 bg-[#232936] text-[#e5e7eb] border border-[#232936] placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-all duration-200 shadow-sm resize-none min-h-[120px]"
+              />
+            </div>
+            <button className="w-full mt-4 bg-[#A7EE43] hover:bg-[#a7ee43d7] text-black font-semibold px-4 py-3 rounded-xl shadow-md transition-all duration-150">
+              Apply Edit
+            </button>
+          </form>
         </div>
       )}
     </>

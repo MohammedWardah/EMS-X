@@ -1,16 +1,9 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SummaryCard from "./SummaryCard";
-import {
-  FaBuilding,
-  FaCheckCircle,
-  FaHourglass,
-  FaMoneyBill,
-  FaTimesCircle,
-  FaUsers,
-  FaFileAlt,
-} from "react-icons/fa";
+import { FaBuilding, FaHourglass, FaMoneyBill, FaUsers, FaFileAlt } from "react-icons/fa";
+import SummaryCardHorizontal from "./SummaryCardHorizontal ";
+import SummaryCardVertical from "./SummaryCardVertical";
 
 const AdminSummary = () => {
   const [summary, setSummary] = useState(null);
@@ -30,6 +23,7 @@ const AdminSummary = () => {
   ];
   const currentMonth = monthNames[new Date().getMonth()];
   const text = `${currentMonth} Payroll`;
+  const text2 = `${currentMonth} Job Applications`;
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -55,63 +49,86 @@ const AdminSummary = () => {
   }
 
   return (
-    <div>
-      <h3 className="text-2x1 font-bold">Overview</h3>
-      <div className="flex flex-wrap gap-6 mt-6">
-        <SummaryCard
-          icon={<FaUsers />}
-          text="Total Employees"
-          number={summary.totalEmployees}
-          color="bg-gray-600"
-        />
-        <SummaryCard
-          icon={<FaBuilding />}
-          text="Total Departments"
-          number={summary.totalDepartments}
-          color="bg-gray-600"
-        />
-        <SummaryCard
-          icon={<FaMoneyBill />}
-          text={text}
-          number={`$${summary.totalSalary}`}
-          color="bg-gray-600"
-        />
-      </div>
+    <div className="w-full max-w-6xl mx-auto space-y-8">
+      {/* Overview Section */}
+      <section className="bg-[#232936] rounded-xl p-4 shadow">
+        <div className="flex overflow-x-auto space-x-3 pb-1 px-1 md:px-0 justify-center gap-10">
+          <SummaryCardHorizontal
+            icon={<FaUsers size={20} className="text-[#60a5fa]" />}
+            label="Employees"
+            value={summary.totalEmployees}
+          />
+          <SummaryCardHorizontal
+            icon={<FaBuilding size={20} className="text-[#f59e0b]" />}
+            label="Departments"
+            value={summary.totalDepartments}
+          />
+          <SummaryCardHorizontal
+            icon={<FaMoneyBill size={20} className="text-[#10b981]" />}
+            label={text}
+            value={`$${summary.totalSalary}`}
+          />
+        </div>
+      </section>
 
-      <div className="mt-12">
-        <h4 className="text-left text-2x1 font-bold">Leave Details</h4>
-        <div className="flex gap-6">
-          <SummaryCard
-            icon={<FaFileAlt />}
-            text="Monthly Requests"
-            number={summary.leaveSummary.applied}
-            color="bg-gray-600"
+      {/* Leave Details */}
+      <section className="bg-[#232936] rounded-xl p-4 shadow">
+        <h4 className="text-base font-semibold text-[#e5e7eb] mb-3">Leave Overview</h4>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <SummaryCardVertical
+            icon={<FaFileAlt size={18} className="text-[#f472b6]" />}
+            label="Monthly Requests"
+            value={summary.leaveSummary.applied}
           />
-          <SummaryCard
-            icon={<FaHourglass />}
-            text="Pending Requests"
-            number={summary.leaveSummary.pending}
-            color="bg-gray-600"
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#f87171]" />}
+            label="Pending Requests"
+            value={summary.leaveSummary.pending}
           />
-        </div>
-      </div>
-      <div className="mt-12">
-        <h4 className="text-left text-2x1 font-bold">Job Applicantions</h4>
-        <div className="flex gap-6">
-          <SummaryCard
-            icon={<FaFileAlt />}
-            text="Total Applications"
-            number={99}
-            color="bg-gray-600"
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#f87171]" />}
+            label="Approved Requests"
+            value={summary.leaveSummary.approved}
           />
-          <SummaryCard
-            icon={<FaHourglass />}
-            text="Pending Applications"
-            number={99}
-            color="bg-gray-600"
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#f87171]" />}
+            label="Rejcted Requests"
+            value={summary.leaveSummary.rejected}
           />
         </div>
-      </div>
+      </section>
+
+      {/* Miscellaneous */}
+      <section className="bg-[#232936] rounded-xl p-4 shadow">
+        <h4 className="text-base font-semibold text-[#e5e7eb] mb-3">Miscellaneous</h4>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <SummaryCardVertical
+            icon={<FaFileAlt size={18} className="text-[#38bdf8]" />}
+            label={text2}
+            value={0}
+          />
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#facc15]" />}
+            label="Upcoming Meetings"
+            value={0}
+          />
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#facc15]" />}
+            label="Tasks"
+            value={0}
+          />
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#facc15]" />}
+            label="Tasks"
+            value={0}
+          />
+          <SummaryCardVertical
+            icon={<FaHourglass size={18} className="text-[#facc15]" />}
+            label="Tasks"
+            value={0}
+          />
+        </div>
+      </section>
     </div>
   );
 };

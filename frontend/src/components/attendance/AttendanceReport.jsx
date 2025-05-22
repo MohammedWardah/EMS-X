@@ -46,7 +46,7 @@ const AttendanceReport = () => {
   }, [skip, dateFilter]);
 
   return (
-    <div className="min-h-screen p-8" style={{ backgroundColor: "#080F17" }}>
+    <div className="min-h-screen p-8">
       <h2 className="text-center text-3xl font-bold text-white tracking-wide mb-8 drop-shadow-md">
         Attendance Report
       </h2>

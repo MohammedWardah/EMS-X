@@ -5,15 +5,15 @@
 }
 
 body {
+  color-scheme: dark;
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
-  background-color: #080f17;
-  color: #d7dfe4;
+  background: linear-gradient(120deg, #111f30 0%, #0d1624 35%, #131720 65%, #0a0e12 100%);
+  color: #e5e7eb;
 }
 
 :root {
-  color-scheme: dark;
   --xwhite: #d7dfe4;
   --xgreen: #a7ee43;
   --xblack: #010304;
@@ -26,8 +26,8 @@ button {
   cursor: pointer;
 }
 
-/* Custom Input styles start*/
-input {
+input,
+textarea {
   background-color: var(--input-background);
   border: 1px solid var(--input-border);
   color: var(--xwhite);
@@ -35,25 +35,26 @@ input {
   padding: 2px 5px;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   outline: none;
-  animation: glow 3s infinite;
+  box-shadow: 0 0 10px var(--xgreen), 0 0 1.5px var(--xgreen);
+  transition: box-shadow 0.25s;
 }
-
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px var(--xgreen);
-  }
-  50% {
-    box-shadow: 0 0 10px var(--xgreen);
-  }
-  100% {
-    box-shadow: 0 0 3px var(--xgreen);
-  }
-}
-/* Custom Input styles end*/
 
 select {
   background-color: var(--xgray);
   color: var(--xwhite);
+}
+
+.rdt_TableHeadRow {
+  border-bottom: 2px solid #232936 !important;
+}
+.rdt_TableCol {
+  border-bottom: none !important;
+}
+
+.rdt_TableHeadRow {
+  background-color: #171c23 !important;
+  border: none;
 }

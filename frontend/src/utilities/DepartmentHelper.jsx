@@ -22,7 +22,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
 
   const handleDelete = async (_id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this department? *WARNING: DOING SO WILL DELETE ALL EMPLOYEES THAT BELONG TO THIS DEPARTMENT ALONG WITH THEIR RECORDS!"
+      "Confirm Deletion: *WARNING: DOING SO WILL DELETE ALL EMPLOYEES THAT BELONG TO THIS DEPARTMENT ALONG WITH THEIR RECORDS!"
     );
     if (!confirmDelete) return;
     try {
@@ -44,7 +44,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
   return (
     <div className="flex space-x-3">
       <button
-        className="px-4 py-1 bg-blue-600 text-white"
+        className="px-4 py-1 bg-blue-600 text-white rounded"
         onClick={() => {
           navigate(`/admin-dashboard/departments/${_id}`);
         }}
@@ -52,7 +52,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
         Edit
       </button>
       <button
-        className="px-4 py-1 bg-red-600 text-white"
+        className="px-4 py-1 bg-red-600 text-white rounded"
         onClick={() => {
           handleDelete(_id);
         }}
