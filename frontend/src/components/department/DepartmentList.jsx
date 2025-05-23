@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DataTable from "react-data-table-component";
 import { columns, DepartmentButtons } from "../../utilities/DepartmentHelper";
 import axios from "axios";
 
@@ -90,43 +89,88 @@ const DepartmentList = () => {
   };
 
   return (
-    <>
-      {depLoading ? (
-        <div className="flex items-center justify-center min-h-[200px]">
-          <span className="text-lg text-gray-400">Loading...</span>
+    <div className="bg-white/4 max-h-4/5 backdrop-blur-md mx-auto rounded-2xl shadow-lg p-6 overflow-hidden">
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search departments..."
+          className="w-full sm:w-72 px-4 py-2 rounded-lg bg-[#161e27] text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a7ee43d7] transition"
+          onChange={filterDepartments}
+        />
+        {/* Title */}
+        <div className="text-center flex-1">
+          <h3 className="text-3xl font-bold text-[#e5e7eb] text-center">
+            Manage Departments
+          </h3>
         </div>
-      ) : (
-        <div className="max-w-5xl mx-auto mt-10 bg-[#171c23] rounded-2xl shadow-2xl p-8 self-start">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3">
-            <h3 className="text-3xl font-bold text-[#e5e7eb] text-center sm:text-left">
-              Manage Departments
-            </h3>
-            <div className="flex gap-2 w-full sm:w-auto">
-              <input
-                type="text"
-                placeholder="Search departments..."
-                className="bg-[#232936] text-[#e5e7eb] placeholder-gray-400 rounded-xl px-4 py-2 w-full sm:w-56 border border-[#232936] focus:border-blue-500 transition-all duration-200 outline-none shadow-sm"
-                onChange={filterDepartments}
-              />
-              <Link
-                to="/admin-dashboard/add-department"
-                className="bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-semibold px-5 py-2 rounded-xl shadow-md transition-all duration-150"
-              >
-                Add New Department
-              </Link>
-            </div>
-          </div>
-          <div className="overflow-x-auto">
-            <DataTable
-              columns={columns}
-              data={filteredDepartments}
-              pagination
-              customStyles={customStyles}
-            />
-          </div>
-        </div>
-      )}
-    </>
+        {/* Add Button */}
+        <Link
+          to="/admin-dashboard/add-department"
+          className="bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-semibold px-5 py-2 rounded-xl shadow-md transition-all duration-150"
+        >
+          + Add New Department
+        </Link>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-auto rounded-lg shadow border border-[#232d39] h-[420px]">
+        <table className="min-w-full divide-y divide-[#232d39] bg-[#161e27] text-sm">
+          <thead>
+            <tr>
+              {columns.map((col, idx) => (
+                <th
+                  key={col.name || idx}
+                  className="px-4 py-3 font-semibold text-left text-gray-300 uppercase tracking-wider"
+                >
+                  {col.name}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {depLoading ? (
+              <tr>
+                <td colSpan={columns.length}>
+                  <div className="flex items-center justify-center h-40">
+                    <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-[#a7ee43]" />
+                  </div>
+                </td>
+              </tr>
+            ) : filteredDepartments.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length} className="text-center py-10 text-gray-500">
+                  No departments found.
+                </td>
+              </tr>
+            ) : (
+              filteredDepartments.map((dep, rowIdx) => (
+                <tr
+                  key={dep._id || rowIdx}
+                  className={
+                    rowIdx % 2 === 0
+                      ? "bg-[#1e293b] hover:bg-[#222e3c]"
+                      : "bg-[#161e27] hover:bg-[#1b2430]"
+                  }
+                >
+                  {columns.map((col, colIdx) => (
+                    <td
+                      key={col.name || colIdx}
+                      className="px-4 py-3 text-gray-200 whitespace-nowrap"
+                    >
+                      {typeof col.selector === "function"
+                        ? col.selector(dep)
+                        : dep[col.selector]}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

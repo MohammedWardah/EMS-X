@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { columns, EmployeeButtons } from "../../utilities/EmployeeHelper";
-import DataTable from "react-data-table-component";
 import axios from "axios";
 
 const EmployeeList = () => {
@@ -28,8 +27,7 @@ const EmployeeList = () => {
             dob: new Date(emp.dob).toDateString(),
             profileImage: (
               <img
-                width={45}
-                className="rounded-full"
+                className="rounded-full w-12 h-12"
                 src={`http://localhost:5000/${emp.userId.profileImage}`}
               />
             ),
@@ -61,23 +59,84 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="text-center">
-        <h3 className="text-2xl font-bold">Manage Employees</h3>
-      </div>
-      <div className="flex justify-between items-center">
+    <div className="bg-white/4 backdrop-blur-md max-h-4/5 mx-auto rounded-2xl shadow-lg p-6 overflow-hidden">
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
         <input
           type="text"
-          placeholder="Search"
-          className="px-4 py-0.5"
+          placeholder="Search by name..."
+          className="w-full sm:w-72 px-4 py-2 rounded-lg bg-[#161e27] text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a7ee43d7] transition"
           onChange={handleFilter}
         />
-        <Link to="/admin-dashboard/add-employee" className="px-4 py-1 bg-gray-600">
-          Add New Employee
+        {/* Title */}
+        <div className="text-center">
+          <h3 className="text-3xl font-bold text-[#e5e7eb] text-center">
+            Manage Employees
+          </h3>
+        </div>
+        <Link
+          to="/admin-dashboard/add-employee"
+          className="bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-semibold px-5 py-2 rounded-xl shadow-md transition-all duration-150"
+        >
+          + Add New Employee
         </Link>
       </div>
-      <div className="mt-6">
-        <DataTable columns={columns} data={filteredEmployees} pagination striped />
+
+      {/* Table */}
+      <div className="overflow-auto rounded-lg shadow border border-[#232d39] h-full">
+        <table className="min-w-full divide-y divide-[#232d39] bg-[#161e27] text-sm">
+          <thead>
+            <tr>
+              {columns.map((col, idx) => (
+                <th
+                  key={col.name || idx}
+                  className="px-4 py-3 font-semibold text-left text-gray-300 uppercase tracking-wider"
+                >
+                  {col.name}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {empLoading ? (
+              <tr>
+                <td colSpan={columns.length}>
+                  <div className="flex items-center justify-center h-40">
+                    <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-[#a7ee43]" />
+                  </div>
+                </td>
+              </tr>
+            ) : filteredEmployees.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length} className="text-center py-10 text-gray-500">
+                  No employees found.
+                </td>
+              </tr>
+            ) : (
+              filteredEmployees.map((emp, rowIdx) => (
+                <tr
+                  key={emp._id || rowIdx}
+                  className={
+                    rowIdx % 2 === 0
+                      ? "bg-[#1e293b] hover:bg-[#222e3c]"
+                      : "bg-[#161e27] hover:bg-[#1b2430]"
+                  }
+                >
+                  {columns.map((col, colIdx) => (
+                    <td
+                      key={col.name || colIdx}
+                      className="px-4 py-3 text-gray-200 whitespace-nowrap"
+                    >
+                      {typeof col.selector === "function"
+                        ? col.selector(emp)
+                        : emp[col.selector]}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

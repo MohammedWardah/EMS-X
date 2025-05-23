@@ -1,64 +1,82 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "../dashboard/AdminSidebar.module.css";
 import { useAuth } from "../../context/authContext";
 // Icons
-import { FaNewspaper, FaUsers } from "react-icons/fa";
-import { MdOutlineDashboard, MdBusiness } from "react-icons/md";
-import { LiaCogSolid, LiaMoneyCheckAltSolid } from "react-icons/lia";
+import { MdOutlineDashboard } from "react-icons/md";
+import { LiaMoneyCheckAltSolid } from "react-icons/lia";
 import { IoMdExit } from "react-icons/io";
 import logo from "../../assets/images/logo.png";
+import logomini from "../../assets/images/logomini.png";
+import { HiOutlineUser } from "react-icons/hi";
 
 const EmpSidebar = () => {
-  const { logout } = useAuth();
-  const { user } = useAuth();
+  const { logout, user } = useAuth();
+
+  // Sidebar nav links
+  const navLinks = [
+    {
+      to: "/employee-dashboard",
+      icon: <MdOutlineDashboard size={21} />,
+      label: "Dashboard",
+      end: true,
+    },
+    {
+      to: `/employee-dashboard/leave/${user?._id}`,
+      icon: <IoMdExit size={21} />,
+      label: "Leave",
+    },
+    {
+      to: `/employee-dashboard/salary/${user?._id}`,
+      icon: <LiaMoneyCheckAltSolid size={21} />,
+      label: "Payroll",
+    },
+    {
+      to: `/employee-dashboard/profile/${user?._id}`,
+      icon: <HiOutlineUser size={21} />,
+      label: "Profile",
+    },
+  ];
+
   return (
-    <aside className={styles.sidebar}>
-      <div className={styles.title}>
-        <img src={logo} alt="Logo" />
-        <h3>EMS-X</h3>
+    <aside className="fixed top-0 left-0 h-screen w-64 flex flex-col z-30 items-center">
+      {/* Logo and Title */}
+      <div
+        className="flex items-center gap-3 font-bold text-xl px-4 border-b select-none w-full justify-center"
+        style={{
+          borderColor: "#232936",
+          height: "80px",
+        }}
+      >
+        <img src={logo} alt="Logo" className="w-12 h-12" draggable={false} />
+        <h3 className="tracking-wider text-2xl">EMS-X</h3>
       </div>
-      <div className={styles.navLinks}>
-        <NavLink
-          to="/employee-dashboard"
-          className={({ isActive }) => (isActive ? styles.active : "")}
-          end
-        >
-          <MdOutlineDashboard />
-          <span>Dashboard</span>
-        </NavLink>
-        <NavLink
-          to={`/employee-dashboard/profile/${user._id}`}
-          className={({ isActive }) => (isActive ? styles.active : "")}
-        >
-          <FaUsers />
-          <span>Profile</span>
-        </NavLink>
-        <NavLink
-          to={`/employee-dashboard/leave/${user._id}`}
-          className={({ isActive }) => (isActive ? styles.active : "")}
-        >
-          <IoMdExit />
-          <span>Leave</span>
-        </NavLink>
-        <NavLink
-          to={`/employee-dashboard/salary/${user._id}`}
-          className={({ isActive }) => (isActive ? styles.active : "")}
-        >
-          <LiaMoneyCheckAltSolid />
-          <span>Payroll</span>
-        </NavLink>
-        <NavLink
-          to="/employee-dashboard/settings"
-          className={({ isActive }) => (isActive ? styles.active : "")}
-        >
-          <LiaCogSolid />
-          <span>Settings</span>
-        </NavLink>
-        <button className={styles.logout} onClick={logout}>
-          Logout
-        </button>
-      </div>
+      {/* Navigation Links */}
+      <nav className="flex flex-col flex-1 w-full px-4 gap-2 pt-4">
+        {navLinks.map(({ to, icon, label, end }) => (
+          <NavLink
+            to={to}
+            key={label}
+            end={end}
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-2 px-4 rounded-xl font-medium transition-all duration-150 
+              ${
+                isActive
+                  ? "text-[#a7ee43] bg-[#232936]"
+                  : "text-[#e5e7eb]  hover:bg-[#232936]"
+              }`
+            }
+          >
+            {icon}
+            <span>{label}</span>
+          </NavLink>
+        ))}
+      </nav>
+      {/* Logout Button pinned at the bottom */}
+      <button
+        className="w-2/3 py-2 rounded-xl bg-red-900 text-white font-semibold shadow hover:bg-red-800 transition-all duration-150 mb-4 mx-4"
+        onClick={logout}
+      >
+        Logout
+      </button>
     </aside>
   );
 };

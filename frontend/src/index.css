@@ -27,7 +27,8 @@ button {
 }
 
 input,
-textarea {
+textarea,
+select {
   background-color: var(--input-background);
   border: 1px solid var(--input-border);
   color: var(--xwhite);
@@ -36,7 +37,8 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
   box-shadow: 0 0 10px var(--xgreen), 0 0 1.5px var(--xgreen);
   transition: box-shadow 0.25s;
@@ -57,4 +59,10 @@ select {
 .rdt_TableHeadRow {
   background-color: #171c23 !important;
   border: none;
+}
+
+::-webkit-outer-spin-button,
+::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

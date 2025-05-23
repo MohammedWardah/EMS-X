@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between w-full">
       <span className="text-lg font-semibold tracking-wide text-[#e5e7eb]">
-        Skylines Corp - {user.name}
+        Skylines Corp - {user.name} {user.role === "admin" ? "(Admin)" : ""}
       </span>
       <div className="flex gap-1">
         <NavLink
@@ -30,7 +30,7 @@ const Navbar = () => {
           <FaRegEnvelope size={22} />
         </NavLink>
         <NavLink
-          to="/admin-dashboard/settings"
+          to={`/${user.role}-dashboard/settings`}
           className={({ isActive }) =>
             `flex items-center gap-3 py-2 px-4 rounded-xl font-medium transition-all duration-150 
                 ${isActive ? "text-[#a7ee43]" : "text-[#e5e7eb]  hover:bg-[#232936]"}`

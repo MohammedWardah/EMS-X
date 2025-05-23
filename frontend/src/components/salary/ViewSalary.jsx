@@ -44,61 +44,84 @@ const ViewSalary = () => {
   };
 
   return (
-    <>
-      {filteredSalaries === null ? (
-        <div>Loading ...</div>
-      ) : (
-        <div className="overflow-x-auto p-5">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold">Salary Pay History</h2>
-          </div>
-          <div className="flex justify-end my-3">
-            <input
-              type="text"
-              placeholder="Search By Emp ID"
-              className="border px-2 rounded-md py-0.5 border-gray-300"
-              onChange={filterSalaries}
-            />
-          </div>
-
-          {filteredSalaries.length > 0 ? (
-            <table className="w-full text-sm text-left text-white-900">
-              <thead className="text-xs text-green-800 uppercase bg-gray-900 border border-gray-300">
-                <tr>
-                  <th className="px-6 py-3">Transaction No</th>
-                  <th className="px-6 py-3">Emp ID</th>
-                  <th className="px-6 py-3">Salary</th>
-                  <th className="px-6 py-3">Allowance</th>
-                  <th className="px-6 py-3">Deduction</th>
-                  <th className="px-6 py-3">Total</th>
-                  <th className="px-6 py-3">Pay Date</th>
+    <div className=" max-w-2/3 mx-auto bg-white/4 backdrop-blur-md rounded-2xl shadow-lg p-8 mt-4 overflow-x-auto">
+      {/* Title */}
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold text-white tracking-tight">
+          Salary Pay History
+        </h2>
+      </div>
+      {/* Table */}
+      <div className="overflow-auto rounded-lg shadow border border-[#232d39] overflow-x-hidden">
+        <table className="min-w-full divide-y divide-[#232d39] bg-[#161e27] text-sm">
+          <thead>
+            <tr>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                #
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                Emp ID
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                Salary
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                Allowance
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                Deduction
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                Total
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-sky-200 uppercase tracking-wider">
+                Pay Date
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredSalaries === null ? (
+              <tr>
+                <td colSpan={7}>
+                  <div className="flex items-center justify-center h-40">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#a7ee43]" />
+                  </div>
+                </td>
+              </tr>
+            ) : filteredSalaries.length > 0 ? (
+              filteredSalaries.map((salary, idx) => (
+                <tr
+                  key={salary.id}
+                  className={
+                    idx % 2 === 0
+                      ? "bg-[#1e293b] hover:bg-[#222e3c]"
+                      : "bg-[#161e27] hover:bg-[#1b2430]"
+                  }
+                >
+                  <td className="px-4 py-3 text-gray-100">{idx + 1}</td>
+                  <td className="px-4 py-3 text-gray-100">
+                    {salary.employeeId.employeeId}
+                  </td>
+                  <td className="px-4 py-3 text-gray-100">{salary.basicSalary}</td>
+                  <td className="px-4 py-3 text-gray-100">{salary.allowances}</td>
+                  <td className="px-4 py-3 text-gray-100">{salary.deductions}</td>
+                  <td className="px-4 py-3 text-gray-100">{salary.netSalary}</td>
+                  <td className="px-4 py-3 text-gray-100">
+                    {new Date(salary.payDate).toLocaleDateString()}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {filteredSalaries.map((salary) => (
-                  <tr
-                    key={salary.id}
-                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
-                  >
-                    <td className="px-6 py-3">{sno++}</td>
-                    <td className="px-6 py-3">{salary.employeeId.employeeId}</td>
-                    <td className="px-6 py-3">{salary.basicSalary}</td>
-                    <td className="px-6 py-3">{salary.allowances}</td>
-                    <td className="px-6 py-3">{salary.deductions}</td>
-                    <td className="px-6 py-3">{salary.netSalary}</td>
-                    <td className="px-6 py-3">
-                      {new Date(salary.payDate).toLocaleDateString()}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <div>No Records</div>
-          )}
-        </div>
-      )}
-    </>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={7} className="text-center py-10 text-gray-500">
+                  No records found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

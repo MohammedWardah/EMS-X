@@ -12,12 +12,14 @@ const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
+  const [isLogging, setIsLogging] = React.useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLogging(true);
       const response = await axios.post("http://localhost:5000/api/auth/login", {
         email,
         password,
@@ -32,6 +34,7 @@ const Login = () => {
         }
       }
     } catch (error) {
+      setIsLogging(false);
       if (error.response && !error.response.data.success) {
         setError(error.response.data.error);
       } else {
@@ -74,7 +77,7 @@ const Login = () => {
               required
             />
           </div>
-          <button>Login</button>
+          <button>{isLogging ? "Logging in..." : "Login"}</button>
         </form>
       </main>
       <footer>

@@ -39,47 +39,53 @@ const RequestLeave = () => {
   };
 
   return (
-    <div className=" m-10 bg-gray-900 p-6 rounded-md shadow-md max-h-1/2">
-      <h2 className="text-2xl font-bold mb-6">Request for Leave</h2>
+    <div className="max-w-xl mx-auto my-8 bg-white/4 backdrop-blur-md p-8 rounded-2xl shadow-lg">
+      <h2 className="text-3xl font-bold text-white mb-8 text-center tracking-tight">
+        Leave Request
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col space-y-4">
+        <div className="space-y-6">
           {/* Leave Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Leave Type</label>
+            <label className="block text-sm font-semibold text-gray-100 mb-1">
+              Leave Type
+            </label>
             <select
               name="leaveType"
               onChange={handleChange}
-              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+              className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
               required
             >
-              <option value="">Select Department</option>
+              <option value="">Select Leave Type</option>
               <option value="Sick Leave">Sick Leave</option>
               <option value="Casual Leave">Casual Leave</option>
               <option value="Annual Leave">Annual Leave</option>
             </select>
           </div>
 
-          {/* From Date */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Date Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <label className="block text-sm font-medium text-gray-700">From Date</label>
+              <label className="block text-sm font-semibold text-gray-100 mb-1">
+                From Date
+              </label>
               <input
                 type="date"
                 name="startDate"
                 onChange={handleChange}
-                className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                 required
               />
             </div>
-
-            {/* To Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">To Date</label>
+              <label className="block text-sm font-semibold text-gray-100 mb-1">
+                To Date
+              </label>
               <input
                 type="date"
                 name="endDate"
                 onChange={handleChange}
-                className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                 required
               />
             </div>
@@ -87,23 +93,28 @@ const RequestLeave = () => {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <label className="block text-sm font-semibold text-gray-100 mb-1">
+              Description
+            </label>
             <textarea
               name="reason"
               placeholder="Reason"
               onChange={handleChange}
-              className="w-full border border-gray-300"
               value={leave.reason}
+              className="w-full rounded-2xl px-4 py-3 bg-[#161e27] text-gray-100 border border-[#232d39] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none min-h-[90px]"
+              required
             ></textarea>
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="mt-6 bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
-        >
-          Send Request
-        </button>
+        <div className="flex justify-center mt-10">
+          <button
+            type="submit"
+            className="w-full md:w-1/2 bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-bold py-3 rounded-full shadow transition text-m"
+          >
+            Send Request
+          </button>
+        </div>
       </form>
     </div>
   );

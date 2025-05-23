@@ -30,57 +30,68 @@ const ViewEmployee = () => {
   return (
     <>
       {employee ? (
-        <div>
-          <div>
-            <img src={`http://localhost:5000/${employee.userId.profileImage}`} alt="" />
+        <div className="flex flex-col md:flex-row max-w-3xl mx-auto bg-white/4 backdrop-blur-md rounded-2xl shadow-lg p-8 gap-8 mt-10">
+          {/* Profile & basic */}
+          <div className="flex flex-col items-center md:items-start gap-4 min-w-[180px]">
+            <img
+              src={`http://localhost:5000/${employee.userId.profileImage}`}
+              alt={employee.userId.name}
+              className="w-32 h-32 rounded-xl object-cover shadow border-4 border-[#232d39] bg-[#161e27] object-center"
+            />
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl font-bold text-white">{employee.userId.name}</h2>
+              <p className="text-sm text-gray-400">{employee.designation}</p>
+              <span className="inline-block mt-2 px-3 py-1 bg-sky-800 text-white rounded-full text-xs">
+                {employee.department.dep_name}
+              </span>
+            </div>
           </div>
-          <h2 className="text-2xl font-bold">Employee Details</h2>
-          <div className="grid grid-cols-2 gap-6">
-            <h3>
-              <span>Name: </span>
-              {employee.userId.name}
-            </h3>
-            <p>
-              <span>Email: </span>
-              {employee.userId.email}
-            </p>
-            <p>
-              <span>Employee ID: </span>
-              {employee.employeeId}
-            </p>
-            <p>
-              <span>Position: </span>
-              {employee.designation}
-            </p>
-            <p>
-              <span>Phone: </span>
-              {employee.phone}
-            </p>
-            <p>
-              <span>Date of Birth: </span>
-              {new Date(employee.dob).toLocaleDateString()}
-            </p>
-            <p>
-              <span>Gender: </span>
-              {employee.gender}
-            </p>
-            <p>
-              <span>Marital Status: </span>
-              {employee.maritalStatus}
-            </p>
-            <p>
-              <span>Salary: </span>
-              {"$" + employee.salary}
-            </p>
-            <p>
-              <span>Department: </span>
-              {employee.department.dep_name}
-            </p>
+          {/* Details */}
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-200">
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">Email</label>
+              <div className="font-medium">{employee.userId.email}</div>
+            </div>
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">
+                Employee ID
+              </label>
+              <div className="font-medium">{employee.employeeId}</div>
+            </div>
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">Phone</label>
+              <div className="font-medium">{employee.phone}</div>
+            </div>
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">
+                Date of Birth
+              </label>
+              <div className="font-medium">
+                {new Date(employee.dob).toLocaleDateString()}
+              </div>
+            </div>
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">Gender</label>
+              <div className="font-medium">{employee.gender}</div>
+            </div>
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">
+                Marital Status
+              </label>
+              <div className="font-medium">{employee.maritalStatus}</div>
+            </div>
+            <div>
+              <label className="block text-gray-400 text-xs uppercase mb-1">Salary</label>
+              <div className="font-medium">${employee.salary}</div>
+            </div>
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
-      )}{" "}
+        <div className="flex items-center justify-center min-h-[350px] w-full">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#a7ee43]" />
+          <span className="text-gray-400 ml-4 text-xl">Loading...</span>
+        </div>
+      )}
     </>
   );
 };

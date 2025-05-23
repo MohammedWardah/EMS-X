@@ -4,7 +4,7 @@ const SummaryCardHorizontal = ({ icon, label, value }) => (
     style={{ border: "1px solid #a7ee43d7" }}
   >
     <div className="mb-1">{icon}</div>
-    <div className="text-2xl font-bold text-white">{value}</div>
+    <div className="text-2xl font-bold text-gray-200">{value}</div>
     <div className="text-gray-400 text-sm mt-1">{label}</div>
   </div>
 );

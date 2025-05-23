@@ -1,7 +1,130 @@
 import React from "react";
+import { FaCalendarAlt } from "react-icons/fa";
+import { HiOutlineCalendar } from "react-icons/hi";
+import { BsListCheck } from "react-icons/bs";
+import { MdBeachAccess } from "react-icons/md";
+import axios from "axios";
+import { useAuth } from "../../context/authContext";
 
 const EmpSummary = () => {
-  return <div>EmpSummary</div>;
+  // Replace with real data
+  const tasksCount = 3;
+  const meetingsCount = 2;
+  const availableAnnualLeave = 14;
+
+  const [latestLeave, setLatestLeave] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const { user } = useAuth();
+
+  React.useEffect(() => {
+    const fetchLatestLeave = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/leave/${user._id}/${user.role}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        if (response.data.success && response.data.leaves.length > 0) {
+          setLatestLeave(response.data.leaves.at(-1));
+        } else {
+          setLatestLeave(null);
+        }
+      } catch (err) {
+        setLatestLeave(null);
+      }
+      setLoading(false);
+    };
+    fetchLatestLeave();
+  }, [user._id, user.role]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[350px] w-full">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#a7ee43]" />
+        <span className="text-gray-400 ml-4 text-xl">Loading...</span>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="w-full max-w-4xl mx-auto grid gap-6 mt-8
+    grid-cols-1 md:grid-cols-3
+    grid-rows-2
+    auto-rows-fr"
+    >
+      {/* === Row 1: Tasks, Meetings, Annual Leave === */}
+      <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px] ">
+        <BsListCheck size={32} className="mb-2 text-green-400" />
+        <span className="text-2xl font-bold text-white">{tasksCount}</span>
+        <span className="text-gray-400 mt-1">Tasks</span>
+      </div>
+      <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
+        <HiOutlineCalendar size={32} className="mb-2 text-blue-400" />
+        <span className="text-2xl font-bold text-white">{meetingsCount}</span>
+        <span className="text-gray-400 mt-1">Meetings</span>
+      </div>
+      <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
+        <span className="text-4xl font-extrabold text-white">{availableAnnualLeave}</span>
+        <span className="text-gray-300 mt-2 text-lg font-semibold text-center">
+          Annual Leave Days Left
+        </span>
+      </div>
+
+      {/* === Row 2: Latest Leave Request (left, spans 2 columns) + Next Holiday (right) === */}
+      <div className="bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] flex flex-col items-start min-h-[160px] md:col-span-2">
+        <div className="flex items-center gap-3 mb-2">
+          <FaCalendarAlt size={32} className="text-red-400" />
+          <span className="text-lg font-semibold text-white">Latest Leave Request</span>
+        </div>
+        <div className="text-gray-300 text-left min-h-[48px] flex items-center">
+          {latestLeave === null ? (
+            <span className="text-gray-500">No leave requests found.</span>
+          ) : (
+            <div>
+              <div>
+                <span className="font-semibold text-gray-400">Date: </span>
+                {new Date(latestLeave.appliedAt || latestLeave.date).toLocaleDateString()}
+              </div>
+              <div>
+                <span className="font-semibold text-gray-400">Type: </span>
+                {latestLeave.leaveType || latestLeave.type}
+              </div>
+              <div>
+                <span className="font-semibold text-gray-400">Status: </span>
+                <span
+                  className={`font-bold ${
+                    (latestLeave.status || "").toLowerCase() === "approved"
+                      ? "text-teal-400"
+                      : (latestLeave.status || "").toLowerCase() === "pending"
+                      ? "text-amber-400"
+                      : "text-rose-400"
+                  }`}
+                >
+                  {latestLeave.status}
+                </span>
+              </div>
+              {latestLeave.reason && (
+                <div>
+                  <span className="font-semibold text-gray-400">Reason: </span>
+                  {latestLeave.reason}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
+        <MdBeachAccess size={32} className="mb-2 text-teal-400" />
+        <span className="text-lg text-gray-300 mb-1">Next Holiday</span>
+        <span className="text-2xl font-bold text-white">5 June</span>
+      </div>
+    </div>
+  );
 };
 
 export default EmpSummary;

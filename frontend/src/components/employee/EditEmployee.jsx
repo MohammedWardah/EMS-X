@@ -103,13 +103,18 @@ const EditEmployee = () => {
   return (
     <>
       {employee && departments ? (
-        <div className="max-w-4xl mx-auto mt-10 bg-gray-900 p-8 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold mb-6">Edit Employee</h2>
+        <div className="max-w-3xl mx-auto mt-10 bg-[#10161c] mt-4 p-8 rounded-2xl shadow-lg">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center tracking-tight">
+            Edit Employee
+          </h2>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Name */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
+                >
                   Name
                 </label>
                 <input
@@ -120,13 +125,14 @@ const EditEmployee = () => {
                   placeholder="Name & Surname"
                   required
                   onChange={handleChange}
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                 />
               </div>
               {/* Email */}
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
                 >
                   Email
                 </label>
@@ -138,13 +144,14 @@ const EditEmployee = () => {
                   required
                   value={employee.email}
                   onChange={handleChange}
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                 />
               </div>
               {/* Phone */}
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
                 >
                   Phone Number
                 </label>
@@ -156,13 +163,14 @@ const EditEmployee = () => {
                   required
                   onChange={handleChange}
                   value={employee.phone}
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                 />
               </div>
               {/* Marital Status */}
               <div>
                 <label
                   htmlFor="maritalStatus"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
                 >
                   Marital Status
                 </label>
@@ -172,7 +180,7 @@ const EditEmployee = () => {
                   required
                   onChange={handleChange}
                   value={employee.maritalStatus}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                 >
                   <option value="">Select</option>
                   <option value="single">Single</option>
@@ -183,7 +191,7 @@ const EditEmployee = () => {
               <div>
                 <label
                   htmlFor="designation"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
                 >
                   Job Title
                 </label>
@@ -195,13 +203,14 @@ const EditEmployee = () => {
                   required
                   onChange={handleChange}
                   value={employee.designation}
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                 />
               </div>
               {/* Salary */}
               <div>
                 <label
                   htmlFor="salary"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
                 >
                   Salary
                 </label>
@@ -213,13 +222,14 @@ const EditEmployee = () => {
                   required
                   onChange={handleChange}
                   value={employee.salary}
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                 />
               </div>
               {/* Department */}
-              <div className="col-span-2">
+              <div className="md:col-span-2">
                 <label
                   htmlFor="department"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-gray-100 mb-2"
                 >
                   Department
                 </label>
@@ -227,11 +237,10 @@ const EditEmployee = () => {
                   name="department"
                   id="department"
                   required
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  className="w-full rounded-full px-4 py-2 bg-[#161e27] text-gray-100 border border-[#232d39] focus:outline-none focus:ring-2 focus:ring-sky-400 transition"
                   onChange={handleChange}
-                  value={employee.department}
+                  value={employee.department.dep_name}
                 >
-                  <option value="">Select Department</option>
                   {departments.map((dep) => (
                     <option key={dep._id} value={dep._id}>
                       {dep.dep_name}
@@ -239,45 +248,21 @@ const EditEmployee = () => {
                   ))}
                 </select>
               </div>
-
-              {/* Password */}
-              {/* <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              required
-              onChange={handleChange}
-            />
-          </div> */}
-              {/* Image */}
-              {/* <div>
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700">
-              Upload Image
-            </label>
-            <input
-              type="file"
-              name="image"
-              id="image"
-              accept="image/*"
-              onChange={handleChange}
-            />
-          </div> */}
             </div>
-            <button
-              type="submit"
-              className="mt-6 bg-gray-600 text-white px-4 py-2 rounded-md"
-            >
-              Apply Edit
-            </button>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="mt-8 w-1/3 bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-bold py-3 rounded-full shadow transition text-lg"
+              >
+                Apply Edit
+              </button>
+            </div>
           </form>
         </div>
       ) : (
-        <div>Loading...</div>
+        <div className="flex items-center justify-center h-3/4">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#a7ee43]" />
+        </div>
       )}
     </>
   );

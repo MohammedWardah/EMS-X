@@ -106,7 +106,7 @@ export const EmployeeButtons = ({ id }) => {
   return (
     <div className="flex space-x-3">
       <button
-        className="px-4 py-1 bg-green-600 text-white"
+        className="px-4 py-1.5 rounded-full bg-sky-400/80 hover:bg-sky-400 text-gray-900 font-semibold shadow transition text-sm"
         onClick={() => {
           navigate(`/admin-dashboard/employees/${id}`);
         }}
@@ -114,19 +114,19 @@ export const EmployeeButtons = ({ id }) => {
         View
       </button>
       <button
-        className="px-4 py-1 bg-red-600 text-white"
+        className="px-4 py-1.5 rounded-full bg-yellow-300/80 hover:bg-yellow-300 text-gray-900 font-semibold shadow transition text-sm"
         onClick={() => navigate(`/admin-dashboard/employees/leave-requests/${id}`)}
       >
         Leave
       </button>
       <button
-        className="px-4 py-1 bg-yellow-600 text-white"
+        className="px-4 py-1.5 rounded-full bg-green-500/80 hover:bg-green-500 text-gray-900 font-semibold shadow transition text-sm"
         onClick={() => navigate(`/admin-dashboard/employees/salary/${id}`)}
       >
         Salary
       </button>
       <button
-        className="px-4 py-1 bg-blue-600 text-white"
+        className="px-4 py-1.5 rounded-full bg-orange-500/80 hover:bg-orange-500 text-gray-900 font-semibold shadow transition text-sm"
         onClick={() => {
           navigate(`/admin-dashboard/employees/edit/${id}`);
         }}
