@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { BsListCheck } from "react-icons/bs";
@@ -7,14 +8,16 @@ import axios from "axios";
 import { useAuth } from "../../context/authContext";
 
 const EmpSummary = () => {
+  const { logout, user } = useAuth();
+  const API_BASE = "http://localhost:5000/api";
+
   // Replace with real data
-  const tasksCount = 0;
-  const meetingsCount = 0;
   const availableAnnualLeave = 20;
 
+  //Latest leave
   const [latestLeave, setLatestLeave] = React.useState(null);
+  const [tasks, setTasks] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const { user } = useAuth();
 
   React.useEffect(() => {
     const fetchLatestLeave = async () => {
@@ -41,6 +44,28 @@ const EmpSummary = () => {
     fetchLatestLeave();
   }, [user._id, user.role]);
 
+  //Tasks count
+  const loadTasks = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${API_BASE}/tasks/employee/${user._id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setTasks(data.tasks);
+    } catch (err) {
+      console.error("Failed fetching employee tasks", err);
+      setTasks([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user._id) loadTasks();
+  }, [user._id]);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[350px] w-full">
@@ -60,12 +85,14 @@ const EmpSummary = () => {
       {/* === Row 1: Tasks, Meetings, Annual Leave === */}
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px] ">
         <BsListCheck size={32} className="mb-2 text-green-400" />
-        <span className="text-2xl font-bold text-white">{tasksCount}</span>
-        <span className="text-gray-400 mt-1">Tasks</span>
+        <span className="text-2xl font-bold text-white">
+          {tasks.filter((task) => task.status === "ongoing").length}
+        </span>
+        <span className="text-gray-400 mt-1">Ongoing Tasks</span>
       </div>
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
         <HiOutlineCalendar size={32} className="mb-2 text-blue-400" />
-        <span className="text-2xl font-bold text-white">{meetingsCount}</span>
+        <span className="text-2xl font-bold text-white">{0}</span>
         <span className="text-gray-400 mt-1">Upcoming Meetings</span>
       </div>
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">

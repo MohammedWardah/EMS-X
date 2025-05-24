@@ -88,7 +88,7 @@ export const AttendanceHelper = ({ status, employeeId, statusChange }) => {
               ? "bg-green-800 text-green-300"
               : status === "absent"
               ? "bg-red-800 text-red-300"
-              : status === "sick"
+              : status === "sick leave"
               ? "bg-yellow-800 text-yellow-200"
               : status === "leave"
               ? "bg-blue-800 text-blue-300"

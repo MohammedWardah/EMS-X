@@ -17,7 +17,10 @@ import SummaryCardHorizontal from "./SummaryCardHorizontal ";
 import SummaryCardVertical from "./SummaryCardVertical";
 
 const AdminSummary = () => {
+  const API_BASE = "http://localhost:5000/api";
   const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [tasks, setTasks] = useState([]);
   const monthNames = [
     "January",
     "February",
@@ -53,6 +56,25 @@ const AdminSummary = () => {
       }
     };
     fetchSummary();
+  }, []);
+
+  // Load tasks
+  const loadTasks = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${API_BASE}/tasks`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setTasks(data.tasks);
+    } catch (err) {
+      console.error("Failed fetching tasks", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
   }, []);
 
   if (!summary) {
@@ -131,8 +153,8 @@ const AdminSummary = () => {
           />
           <SummaryCardVertical
             icon={<BsListCheck size={20} className="text-green-400" />}
-            label="Tasks"
-            value={0}
+            label="Ongoing Distributed Tasks"
+            value={tasks.filter((task) => task.status === "ongoing").length}
           />
           <SummaryCardVertical
             icon={<MdBeachAccess size={20} className="text-teal-400" />}

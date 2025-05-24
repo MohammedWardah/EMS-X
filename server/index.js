@@ -11,6 +11,7 @@ import leaveRouter from "./routes/leave.js";
 import settingRouter from "./routes/setting.js";
 import dashboardRouter from "./routes/dashboard.js";
 import attendanceRouter from "./routes/attendance.js";
+import taskRouter from "./routes/task.js";
 
 console.log("BOOTING EMS SERVER…");
 
@@ -28,6 +29,7 @@ app.use("/api/leave", leaveRouter);
 app.use("/api/setting", settingRouter);
 app.use("/api/attendance", attendanceRouter);
 app.use("/api/dashboard", dashboardRouter);
+app.use("/api/tasks", taskRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

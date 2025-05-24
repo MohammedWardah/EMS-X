@@ -59,7 +59,7 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="bg-white/4 backdrop-blur-md max-h-4/5 mx-auto rounded-2xl shadow-lg p-6 overflow-hidden">
+    <div className="bg-white/4 backdrop-blur-md mx-auto rounded-2xl shadow-lg p-6 overflow-hidden">
       {/* Actions */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
         <input
@@ -68,7 +68,6 @@ const EmployeeList = () => {
           className="w-full sm:w-72 px-4 py-2 rounded-lg bg-[#161e27] text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a7ee43d7] transition"
           onChange={handleFilter}
         />
-        {/* Title */}
         <div className="text-center">
           <h3 className="text-3xl font-bold text-[#e5e7eb] text-center">
             Manage Employees
@@ -83,10 +82,10 @@ const EmployeeList = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-auto rounded-lg shadow border border-[#232d39] h-full">
+      <div className="rounded-lg shadow border border-[#232d39] max-h-[520px] overflow-y-auto">
         <table className="min-w-full divide-y divide-[#232d39] bg-[#161e27] text-sm">
           <thead>
-            <tr>
+            <tr className="bg-[#1e293b] sticky top-0 z-10">
               {columns.map((col, idx) => (
                 <th
                   key={col.name || idx}

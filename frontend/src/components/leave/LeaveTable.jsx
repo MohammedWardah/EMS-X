@@ -87,7 +87,7 @@ const LeaveTable = () => {
               ? "bg-amber-400/90 text-gray-900"
               : "bg-amber-400/70 text-gray-900 hover:bg-amber-400/90"
           } transition`}
-          onClick={() => handleStatusFilter("Pending")}
+          onClick={() => handleStatusFilter("pending")}
         >
           Pending
         </button>
@@ -97,7 +97,7 @@ const LeaveTable = () => {
               ? "bg-teal-400/90 text-gray-900"
               : "bg-teal-400/70 text-gray-900 hover:bg-teal-400/90"
           } transition`}
-          onClick={() => handleStatusFilter("Approved")}
+          onClick={() => handleStatusFilter("approved")}
         >
           Approved
         </button>
@@ -107,7 +107,7 @@ const LeaveTable = () => {
               ? "bg-rose-400/90 text-gray-900"
               : "bg-rose-400/70 text-gray-900 hover:bg-rose-400/90"
           } transition`}
-          onClick={() => handleStatusFilter("Rejected")}
+          onClick={() => handleStatusFilter("rejected")}
         >
           Rejected
         </button>

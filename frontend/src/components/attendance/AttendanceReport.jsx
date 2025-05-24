@@ -149,7 +149,7 @@ const AttendanceReport = () => {
                                   : "bg-gray-700 text-gray-300")
                               }
                             >
-                              {data.status}
+                              {data.status === "sick" ? "sick leave" : data.status}
                             </span>
                           </td>
                         </tr>

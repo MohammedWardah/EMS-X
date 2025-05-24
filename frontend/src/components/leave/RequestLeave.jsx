@@ -6,7 +6,7 @@ import axios from "axios";
 const RequestLeave = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = React.useState(false);
   const [leave, setLeave] = React.useState({
     userId: user._id,
   });
@@ -21,6 +21,7 @@ const RequestLeave = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(`http://localhost:5000/api/leave/add`, leave, {
         headers: {
@@ -35,6 +36,8 @@ const RequestLeave = () => {
       if (error.response && !error.response.data.success) {
         alert(error.response.data.error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -112,7 +115,7 @@ const RequestLeave = () => {
             type="submit"
             className="w-full md:w-1/2 bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-bold py-3 rounded-full shadow transition text-m"
           >
-            Send Request
+            {loading ? "Sending Request" : "Send Request"}
           </button>
         </div>
       </form>

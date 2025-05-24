@@ -23,6 +23,8 @@ import LeaveTable from "./components/leave/LeaveTable";
 import LeaveDetails from "./components/leave/LeaveDetails";
 import Attendance from "./components/attendance/Attendance";
 import AttendanceReport from "./components/attendance/AttendanceReport";
+import MeetingsList from "./components/meetings/meetingsList";
+import TasksList from "./components/tasks/tasksList";
 
 function App() {
   return (
@@ -59,6 +61,8 @@ function App() {
 
           <Route path={"settings"} element={<Settings />}></Route>
           <Route path={"attendance"} element={<Attendance />}></Route>
+          <Route path={"tasks"} element={<TasksList />}></Route>
+          <Route path={"meetings"} element={<MeetingsList />}></Route>
           <Route path={"attendance-report"} element={<AttendanceReport />}></Route>
         </Route>
         <Route
@@ -77,6 +81,8 @@ function App() {
           <Route path={"request-leave"} element={<RequestLeave />}></Route>
           <Route path={"salary/:id"} element={<ViewSalary />}></Route>
           <Route path={"settings"} element={<Settings />}></Route>
+          <Route path={"tasks/:id"} element={<TasksList />}></Route>
+          <Route path={"meetings/:id"} element={<MeetingsList />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

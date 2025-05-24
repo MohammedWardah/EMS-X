@@ -118,7 +118,7 @@ const Attendance = () => {
                     <td className="px-4 py-2 text-gray-200">{data.designation}</td>
                     <td className="px-4 py-2">
                       <AttendanceHelper
-                        status={data.status}
+                        status={data.status === "sick" ? "sick leave" : data.status}
                         employeeId={data.employeeId}
                         statusChange={statusChange}
                       />

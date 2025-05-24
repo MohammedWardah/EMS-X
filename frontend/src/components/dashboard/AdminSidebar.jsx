@@ -3,10 +3,12 @@ import { useAuth } from "../../context/authContext.jsx";
 // Icons
 import { FaNewspaper, FaUsers } from "react-icons/fa";
 import { MdOutlineDashboard, MdBusiness } from "react-icons/md";
-import { LiaCogSolid, LiaMoneyCheckAltSolid } from "react-icons/lia";
+import { LiaMoneyCheckAltSolid } from "react-icons/lia";
 import { IoMdExit } from "react-icons/io";
 import logo from "../../assets/images/logo.png";
 import logomini from "../../assets/images/logomini.png";
+import { HiOutlineCalendar } from "react-icons/hi";
+import { BsListCheck } from "react-icons/bs";
 
 const navLinks = [
   {
@@ -16,21 +18,31 @@ const navLinks = [
     end: true,
   },
   {
-    to: "/admin-dashboard/departments",
-    icon: <MdBusiness size={21} />,
-    label: "Departments",
+    to: "/admin-dashboard/attendance",
+    icon: <FaNewspaper size={21} />,
+    label: "Attendance",
   },
-  { to: "/admin-dashboard/employees", icon: <FaUsers size={21} />, label: "Employees" },
   { to: "/admin-dashboard/leave-requests", icon: <IoMdExit size={21} />, label: "Leave" },
+  {
+    to: "/admin-dashboard/tasks",
+    icon: <BsListCheck size={21} />,
+    label: "Tasks",
+  },
+  {
+    to: "/admin-dashboard/meetings",
+    icon: <HiOutlineCalendar size={21} />,
+    label: "Meetings",
+  },
   {
     to: "/admin-dashboard/salary/add",
     icon: <LiaMoneyCheckAltSolid size={21} />,
     label: "Payroll",
   },
+  { to: "/admin-dashboard/employees", icon: <FaUsers size={21} />, label: "Employees" },
   {
-    to: "/admin-dashboard/attendance",
-    icon: <FaNewspaper size={21} />,
-    label: "Attendance",
+    to: "/admin-dashboard/departments",
+    icon: <MdBusiness size={21} />,
+    label: "Departments",
   },
 ];
 

@@ -6,7 +6,8 @@ import { LiaMoneyCheckAltSolid } from "react-icons/lia";
 import { IoMdExit } from "react-icons/io";
 import logo from "../../assets/images/logo.png";
 import logomini from "../../assets/images/logomini.png";
-import { HiOutlineUser } from "react-icons/hi";
+import { HiOutlineCalendar, HiOutlineUser } from "react-icons/hi";
+import { BsListCheck } from "react-icons/bs";
 
 const EmpSidebar = () => {
   const { logout, user } = useAuth();
@@ -18,6 +19,16 @@ const EmpSidebar = () => {
       icon: <MdOutlineDashboard size={21} />,
       label: "Dashboard",
       end: true,
+    },
+    {
+      to: `/employee-dashboard/tasks/${user?._id}`,
+      icon: <BsListCheck size={21} />,
+      label: "Tasks",
+    },
+    {
+      to: `/employee-dashboard/meetings/${user?._id}`,
+      icon: <HiOutlineCalendar size={21} />,
+      label: "Meetings",
     },
     {
       to: `/employee-dashboard/leave/${user?._id}`,
