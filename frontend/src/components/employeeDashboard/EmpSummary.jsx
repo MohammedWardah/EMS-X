@@ -8,9 +8,9 @@ import { useAuth } from "../../context/authContext";
 
 const EmpSummary = () => {
   // Replace with real data
-  const tasksCount = 3;
-  const meetingsCount = 2;
-  const availableAnnualLeave = 14;
+  const tasksCount = 0;
+  const meetingsCount = 0;
+  const availableAnnualLeave = 20;
 
   const [latestLeave, setLatestLeave] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -66,7 +66,7 @@ const EmpSummary = () => {
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
         <HiOutlineCalendar size={32} className="mb-2 text-blue-400" />
         <span className="text-2xl font-bold text-white">{meetingsCount}</span>
-        <span className="text-gray-400 mt-1">Meetings</span>
+        <span className="text-gray-400 mt-1">Upcoming Meetings</span>
       </div>
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
         <span className="text-4xl font-extrabold text-white">{availableAnnualLeave}</span>
@@ -120,7 +120,7 @@ const EmpSummary = () => {
       </div>
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
         <MdBeachAccess size={32} className="mb-2 text-teal-400" />
-        <span className="text-lg text-gray-300 mb-1">Next Holiday</span>
+        <span className="text-lg text-gray-300 mb-1">Upcoming Public Holiday</span>
         <span className="text-2xl font-bold text-white">5 June</span>
       </div>
     </div>

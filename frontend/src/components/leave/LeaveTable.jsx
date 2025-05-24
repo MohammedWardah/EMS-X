@@ -1,8 +1,12 @@
 import React from "react";
 import axios from "axios";
-import DataTable from "react-data-table-component";
-import { columns } from "../../utilities/LeaveHelper";
 import { LeaveButtons } from "../../utilities/LeaveHelper";
+
+const statusColors = {
+  Pending: "bg-amber-400/80 text-gray-900",
+  Approved: "bg-teal-400/80 text-gray-900",
+  Rejected: "bg-rose-400/80 text-gray-900",
+};
 
 const LeaveTable = () => {
   const [leaves, setLeaves] = React.useState([]);
@@ -70,59 +74,115 @@ const LeaveTable = () => {
   const handleSearchInput = (e) => setSearchEmpId(e.target.value);
 
   return (
-    <div className="p-6">
-      <div className="text-center mb-4">
-        <h3 className="text-2xl font-bold">Leave Requests</h3>
+    <div className="p-4 max-h-4/5 bg-white/4 max-h-4/5 backdrop-blur-md">
+      <div className="text-center mb-6">
+        <h3 className="text-3xl font-bold text-[#e5e7eb] text-center">Leave Requests</h3>
       </div>
 
       {/* Filter buttons */}
-      <div className="flex items-center mb-4">
+      <div className="flex flex-wrap items-center mb-4 gap-2">
         <button
-          className={`px-2 py-1 ml-4 ${
-            statusFilter === "pending" ? "bg-yellow-600" : "bg-yellow-800"
-          }`}
-          onClick={() => handleStatusFilter("pending")}
+          className={`w-22 py-1.5 rounded-full font-semibold text-base ${
+            statusFilter === "Pending"
+              ? "bg-amber-400/90 text-gray-900"
+              : "bg-amber-400/70 text-gray-900 hover:bg-amber-400/90"
+          } transition`}
+          onClick={() => handleStatusFilter("Pending")}
         >
           Pending
         </button>
         <button
-          className={`px-2 py-1 ml-4 ${
-            statusFilter === "approved" ? "bg-yellow-600" : "bg-yellow-800"
-          }`}
-          onClick={() => handleStatusFilter("approved")}
+          className={`w-22 py-1.5 rounded-full font-semibold text-base ${
+            statusFilter === "Approved"
+              ? "bg-teal-400/90 text-gray-900"
+              : "bg-teal-400/70 text-gray-900 hover:bg-teal-400/90"
+          } transition`}
+          onClick={() => handleStatusFilter("Approved")}
         >
           Approved
         </button>
         <button
-          className={`px-2 py-1 ml-4 ${
-            statusFilter === "rejected" ? "bg-yellow-600" : "bg-yellow-800"
-          }`}
-          onClick={() => handleStatusFilter("rejected")}
+          className={`w-22 py-1.5 rounded-full font-semibold text-base ${
+            statusFilter === "Rejected"
+              ? "bg-rose-400/90 text-gray-900"
+              : "bg-rose-400/70 text-gray-900 hover:bg-rose-400/90"
+          } transition`}
+          onClick={() => handleStatusFilter("Rejected")}
         >
           Rejected
         </button>
-        <button className="px-2 py-1 ml-4 bg-gray-700" onClick={handleShowAll}>
+        <button
+          className="w-22 py-1.5 rounded-full font-semibold text-base bg-green-600 text-gray-900 hover:bg-green-500 transition"
+          onClick={handleShowAll}
+        >
           Show All
         </button>
-
         {/* Search input */}
         <input
           type="text"
           placeholder="Search by Emp ID"
           value={searchEmpId}
           onChange={handleSearchInput}
-          className="ml-8 px-2 py-1 border border-gray-400 rounded"
+          className="ml-4 px-3 py-2 border border-gray-400 rounded-lg bg-[#181f29] text-gray-100"
         />
       </div>
 
       {/* Table */}
-      <div className="mt-5">
-        <DataTable
-          columns={columns}
-          data={filteredLeaves}
-          pagination
-          noDataComponent={<div>No leave requests found.</div>}
-        />
+      <div className="overflow-auto rounded-2xl shadow border border-[#232d39] bg-[#10161c]/80">
+        <table className="w-full text-sm text-left">
+          <thead>
+            <tr className="bg-[#1d2736]">
+              <th className="px-4 py-3 font-bold text-gray-300">S No</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Emp ID</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Name</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Leave Type</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Department</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Days</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Status</th>
+              <th className="px-4 py-3 font-bold text-gray-300">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!filteredLeaves ? (
+              <tr>
+                <td colSpan={8}>
+                  <div className="flex items-center justify-center min-h-[200px] w-full">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#a7ee43]" />
+                    <span className="text-gray-400 ml-4 text-lg">Loading...</span>
+                  </div>
+                </td>
+              </tr>
+            ) : filteredLeaves.length === 0 ? (
+              <tr>
+                <td colSpan={8} className="text-center text-gray-400 py-8">
+                  No leave requests found.
+                </td>
+              </tr>
+            ) : (
+              filteredLeaves.map((leave) => (
+                <tr key={leave._id} className="hover:bg-[#202c3a]/70 transition-colors">
+                  <td className="px-4 py-2 text-gray-300">{leave.sno}</td>
+                  <td className="px-4 py-2 text-gray-200">{leave.employeeId}</td>
+                  <td className="px-4 py-2 text-gray-200">{leave.name}</td>
+                  <td className="px-4 py-2 text-gray-200">{leave.leaveType}</td>
+                  <td className="px-4 py-2 text-gray-200">{leave.department}</td>
+                  <td className="px-4 py-2 text-gray-200">{leave.days}</td>
+                  <td className="px-4 py-2">
+                    <span
+                      className={
+                        "inline-block px-3 py-1 rounded-full font-semibold text-xs " +
+                        (statusColors[leave.status] || "bg-gray-700 text-gray-300")
+                      }
+                    >
+                      {leave.status?.charAt(0).toUpperCase() + leave.status?.slice(1)}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2">{leave.action}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

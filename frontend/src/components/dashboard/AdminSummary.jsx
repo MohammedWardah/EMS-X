@@ -136,7 +136,7 @@ const AdminSummary = () => {
           />
           <SummaryCardVertical
             icon={<MdBeachAccess size={20} className="text-teal-400" />}
-            label="Upcoming Holiday"
+            label="Upcoming Public Holiday"
             value={"5 June"}
           />
         </div>

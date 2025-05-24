@@ -44,7 +44,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
   return (
     <div className="flex space-x-3">
       <button
-        className="px-4 py-1.5 rounded-full bg-slate-500 hover:bg-slate-600 text-gray-300 font-semibold shadow transition text-sm"
+        className="w-18 px-2 py-1.5 rounded-full bg-slate-500 hover:bg-slate-600 text-gray-300 font-semibold shadow transition text-sm"
         onClick={() => {
           navigate(`/admin-dashboard/departments/${_id}`);
         }}
@@ -52,7 +52,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
         Edit
       </button>
       <button
-        className="px-4 py-1.5 rounded-full bg-rose-500 hover:bg-rose-600 text-gray-300 font-semibold shadow transition text-sm"
+        className="w-18 px-2 py-1.5 rounded-full bg-rose-500 hover:bg-rose-600 text-gray-300 font-semibold shadow transition text-sm"
         onClick={() => {
           handleDelete(_id);
         }}

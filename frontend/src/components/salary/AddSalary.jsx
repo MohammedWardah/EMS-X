@@ -185,7 +185,7 @@ const AddSalary = () => {
             <div className="flex justify-center  mt-10">
               <button
                 type="submit"
-                className="w-full md:w-1/3 bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-bold py-3 rounded-full shadow transition text-m"
+                className="w-1/4 bg-[#a7ee43] hover:bg-[#a7ee43d7] text-black font-bold py-3 rounded-full shadow transition text-m"
               >
                 Confirm Pay
               </button>

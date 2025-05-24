@@ -48,94 +48,101 @@ const LeaveDetails = () => {
     }
   };
 
+  function capitalizeFirst(str) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <>
       {leave ? (
-        <div>
-          <h2 className="text-2xl font-bold">Leave Request Details</h2>
-          <div>
+        <div className="max-w-2xl mx-auto mt-10 bg-[#10161c] rounded-2xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-[#e5e7eb] text-center mb-4">
+            Leave Request Details
+          </h2>
+          <div className="flex flex-col items-center mb-8">
             <img
               src={`http://localhost:5000/${leave.employeeId.userId.profileImage}`}
-              alt=""
+              alt={leave.employeeId.userId.name}
+              className="w-28 h-28 rounded-full object-cover border-4 border-gray-700 shadow"
               style={{
-                width: "200px",
-                height: "200px",
+                minWidth: "96px",
+                minHeight: "96px",
+                maxWidth: "120px",
+                maxHeight: "120px",
               }}
             />
-          </div>
-          <div className="grid grid-cols-2 gap-6">
-            <h3>
-              <span>Name: </span>
+            <p className="mt-3 text-xl font-semibold text-white">
               {leave.employeeId.userId.name}
-            </h3>
-            <p>
-              <span>Employee ID: </span>
-              {leave.employeeId.employeeId}
             </p>
-            <p>
-              <span>Gender: </span>
-              {leave.employeeId.gender}
-            </p>
-            <p>
-              <span>Department: </span>
-              {leave.employeeId.department.dep_name}
-            </p>
-            <p>
-              <span>Position: </span>
-              {leave.employeeId.designation}
-            </p>
-            <p>
-              <span>Phone: </span>
-              {leave.employeeId.phone}
-            </p>
-            <p>
-              <span>Leave Type: </span>
-              {leave.leaveType}
-            </p>
-            <p>
-              <span>Reason: </span>
-              {leave.reason}
-            </p>
-            <p>
-              <span>From: </span>
-              {new Date(leave.startDate).toLocaleDateString()}
-            </p>
-            <p>
-              <span>Until: </span>
-              {new Date(leave.endDate).toLocaleDateString()}
-            </p>
-            <p className="text-lg font-bold">
+            <p className="text-gray-400 text-sm">{leave.employeeId.employeeId}</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <Detail label="Gender" value={capitalizeFirst(leave.employeeId.gender)} />
+            <Detail label="Phone" value={leave.employeeId.phone} />
+            <Detail label="Department" value={leave.employeeId.department.dep_name} />
+            <Detail label="Position" value={leave.employeeId.designation} />
+            <Detail label="Leave Type" value={leave.leaveType} />
+            <Detail label="Reason" value={leave.reason} />
+            <Detail label="From" value={new Date(leave.startDate).toLocaleDateString()} />
+            <Detail label="Until" value={new Date(leave.endDate).toLocaleDateString()} />
+          </div>
+
+          {/* Status and actions */}
+          <div className="mt-4 flex items-center gap-4">
+            <span className="text-lg font-bold text-white">
               {leave.status === "Pending" ? "Action:" : "Status:"}
-            </p>
+            </span>
             {leave.status === "Pending" ? (
-              <div className="flex space-x-2">
+              <div className="flex gap-3">
                 <button
-                  className="px-2 py-0.5 bg-teal-500"
-                  onClick={() => {
-                    changeStatus(leave._id, "Approved");
-                  }}
+                  className="w-25 px-3 py-2 rounded-full font-bold bg-green-500 hover:bg-green-600 text-gray-800 shadow transition"
+                  onClick={() => changeStatus(leave._id, "Approved")}
                 >
                   Approve
                 </button>
                 <button
-                  className="px-2 py-0.5 bg-red-500"
-                  onClick={() => {
-                    changeStatus(leave._id, "Rejected");
-                  }}
+                  className="w-25 px-3 py-2 rounded-full font-bold bg-red-500 hover:bg-red-600 text-gray-800 shadow transition"
+                  onClick={() => changeStatus(leave._id, "Rejected")}
                 >
                   Reject
                 </button>
               </div>
             ) : (
-              <p className="font-medium">{leave.status}</p>
+              <span
+                className={
+                  "px-4 py-1 rounded-full text-sm font-semibold " +
+                  (leave.status === "Approved"
+                    ? "bg-teal-400/80 text-gray-900"
+                    : leave.status === "Rejected"
+                    ? "bg-rose-400/80 text-gray-900"
+                    : "bg-amber-400/80 text-gray-900")
+                }
+              >
+                {leave.status}
+              </span>
             )}
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
-      )}{" "}
+        <div className="flex items-center justify-center min-h-[350px] w-full">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#a7ee43]" />
+          <span className="text-gray-400 ml-4 text-xl">Loading...</span>
+        </div>
+      )}
     </>
   );
+
+  // Small helper component to keep info neat
+  function Detail({ label, value }) {
+    return (
+      <div className="flex flex-col mb-1">
+        <span className="text-gray-400 text-xs">{label}</span>
+        <span className="text-white font-medium">{value}</span>
+      </div>
+    );
+  }
 };
 
 export default LeaveDetails;
