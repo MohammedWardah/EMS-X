@@ -59,7 +59,7 @@ const AddSalary = () => {
     <>
       {departments ? (
         <div className="bg-white/3 backdrop-blur-md rounded-xl mt-12 p-4 shadow w-1/2 mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center tracking-tight">
+          <h2 className="text-2xl font-bold text-white mb-8 text-center tracking-tight">
             Salary Pay
           </h2>
           <form onSubmit={handleSubmit}>

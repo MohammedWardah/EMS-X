@@ -62,7 +62,7 @@ const Attendance = () => {
 
   return (
     <div className="p-4 bg-white/4 max-h-4/5 backdrop-blur-md">
-      <h2 className="text-3xl font-bold text-[#e5e7eb] text-center">Attendance Entry</h2>
+      <h2 className="text-2xl font-bold text-[#e5e7eb] text-center">Attendance Entry</h2>
       {/* Filter/Search */}
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
         <span className="text-lg font-semibold text-gray-200">

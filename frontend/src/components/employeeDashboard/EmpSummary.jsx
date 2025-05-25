@@ -18,6 +18,7 @@ const EmpSummary = () => {
   const [latestLeave, setLatestLeave] = React.useState(null);
   const [tasks, setTasks] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [meetings, setMeetings] = useState([]);
 
   React.useEffect(() => {
     const fetchLatestLeave = async () => {
@@ -62,8 +63,28 @@ const EmpSummary = () => {
     }
   };
 
+  const loadMeetings = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${API_BASE}/meetings/employee/${user._id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setMeetings(data.meetings);
+    } catch (err) {
+      setMeetings([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (user._id) loadTasks();
+  }, [user._id]);
+
+  useEffect(() => {
+    if (user._id) loadMeetings();
   }, [user._id]);
 
   if (loading) {
@@ -92,7 +113,7 @@ const EmpSummary = () => {
       </div>
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">
         <HiOutlineCalendar size={32} className="mb-2 text-blue-400" />
-        <span className="text-2xl font-bold text-white">{0}</span>
+        <span className="text-2xl font-bold text-white">{meetings.length}</span>
         <span className="text-gray-400 mt-1">Upcoming Meetings</span>
       </div>
       <div className="flex flex-col items-center justify-center bg-white/4 backdrop-blur-md rounded-2xl p-6 shadow border border-[#232d39] min-h-[160px]">

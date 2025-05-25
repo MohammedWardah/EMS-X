@@ -21,6 +21,7 @@ const AdminSummary = () => {
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [meetings, setMeetings] = useState([]);
   const monthNames = [
     "January",
     "February",
@@ -58,7 +59,6 @@ const AdminSummary = () => {
     fetchSummary();
   }, []);
 
-  // Load tasks
   const loadTasks = async () => {
     setLoading(true);
     try {
@@ -73,8 +73,23 @@ const AdminSummary = () => {
     }
   };
 
+  const loadMeetings = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${API_BASE}/meetings`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setMeetings(data.meetings);
+    } catch (err) {
+      console.error("Failed fetching meetings", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadTasks();
+    loadMeetings();
   }, []);
 
   if (!summary) {
@@ -149,7 +164,7 @@ const AdminSummary = () => {
           <SummaryCardVertical
             icon={<HiOutlineCalendar size={20} className="text-blue-400" />}
             label="Upcoming Meetings"
-            value={0}
+            value={meetings.length}
           />
           <SummaryCardVertical
             icon={<BsListCheck size={20} className="text-green-400" />}

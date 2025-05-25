@@ -47,7 +47,7 @@ const ViewSalary = () => {
     <div className=" max-w-2/3 mx-auto bg-white/4 backdrop-blur-md rounded-2xl shadow-lg p-8 mt-4 overflow-x-auto">
       {/* Title */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-white tracking-tight">
+        <h2 className="text-2xl font-bold text-white tracking-tight">
           Salary Pay History
         </h2>
       </div>

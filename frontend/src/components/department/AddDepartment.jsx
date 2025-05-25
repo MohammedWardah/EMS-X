@@ -87,12 +87,15 @@ const AddDepartment = () => {
           {error && (
             <div className="text-center text-sm text-red-400 font-medium">{error}</div>
           )}
-          <button
-            type="submit"
-            className="bg-[#a7ee43] hover:bg-[#a7ee43d7] w-full py-3 rounded-xl text-black font-semibold text-lg tracking-wide shadow-lg transition-all duration-200"
-          >
-            Add Department
-          </button>
+          <div className="flex justify-center">
+            {" "}
+            <button
+              type="submit"
+              className="bg-[#a7ee43] hover:bg-[#a7ee43d7] w-1/2 py-3 rounded-xl text-black font-semibold text-lg tracking-wide shadow-lg transition-all duration-200"
+            >
+              Add Department
+            </button>
+          </div>
         </form>
       </div>
     </div>

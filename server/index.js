@@ -12,6 +12,7 @@ import settingRouter from "./routes/setting.js";
 import dashboardRouter from "./routes/dashboard.js";
 import attendanceRouter from "./routes/attendance.js";
 import taskRouter from "./routes/task.js";
+import meetingRouter from "./routes/meeting.js";
 
 console.log("BOOTING EMS SERVER…");
 
@@ -30,6 +31,7 @@ app.use("/api/setting", settingRouter);
 app.use("/api/attendance", attendanceRouter);
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api/tasks", taskRouter);
+app.use("/api/meetings", meetingRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

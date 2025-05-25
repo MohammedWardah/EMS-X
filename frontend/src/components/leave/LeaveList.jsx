@@ -41,7 +41,7 @@ const LeaveList = () => {
     <div className="max-w-9/10 mx-auto bg-white/4 backdrop-blur-md rounded-2xl shadow-lg p-8 mt-4 overflow-hidden">
       {/* Title & Button */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-        <h3 className="text-3xl font-bold text-white text-center sm:text-left flex-1">
+        <h3 className="text-2xl font-bold text-white text-center sm:text-left flex-1">
           Leave Requests
         </h3>
         {user.role === "employee" && (

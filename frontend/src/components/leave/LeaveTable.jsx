@@ -76,7 +76,7 @@ const LeaveTable = () => {
   return (
     <div className="p-4 max-h-4/5 bg-white/4 max-h-4/5 backdrop-blur-md">
       <div className="text-center mb-6">
-        <h3 className="text-3xl font-bold text-[#e5e7eb] text-center">Leave Requests</h3>
+        <h3 className="text-2xl font-bold text-[#e5e7eb] text-center">Leave Requests</h3>
       </div>
 
       {/* Filter buttons */}

@@ -49,7 +49,7 @@ const AttendanceReport = () => {
 
   return (
     <div className="min-h-screen p-4">
-      <h2 className="text-3xl font-bold text-[#e5e7eb] text-center">Attendance Report</h2>
+      <h2 className="text-2xl font-bold text-[#e5e7eb] text-center">Attendance Report</h2>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">

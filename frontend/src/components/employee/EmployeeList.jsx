@@ -69,7 +69,7 @@ const EmployeeList = () => {
           onChange={handleFilter}
         />
         <div className="text-center">
-          <h3 className="text-3xl font-bold text-[#e5e7eb] text-center">
+          <h3 className="text-2xl font-bold text-[#e5e7eb] text-center">
             Manage Employees
           </h3>
         </div>
